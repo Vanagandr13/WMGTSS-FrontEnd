@@ -14,7 +14,6 @@ import { LoginPageComponent } from './login-page/login-page.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { ModulePageComponent } from './module-page/module-page.component';
 import { DatafileBoardPageComponent } from './datafile-board-page/datafile-board-page.component';
-import { PageComponent } from './page/page.component';
 
 import { ContentService } from './shared/services/content.service';
 
@@ -26,7 +25,6 @@ import { ContentService } from './shared/services/content.service';
     LoginPageComponent,
     ModulePageComponent,
     DatafileBoardPageComponent,
-    PageComponent
   ],
   imports: [
     BrowserModule,
