@@ -1,0 +1,65 @@
+{
+  "boardTitle": "Business Management Datafile Board",
+  "clusters": [
+    {
+      "title": "Assessment Documents",
+      "description": "These documents relate to the module final assessment. For any questions regarding the assesment please refer to your lecturer",
+      "files": [
+        {
+            "title": "Assesment Brief.pdf",
+            "filetype": ".pdf",
+            "uploader": "Mr Lecturer",
+            "uploadDate": "12/01/22",
+            "fileSize": "100Kb",
+            "path": "test"
+        },
+        {
+            "title": "Assesment Front Sheet.docx",
+            "filetype": ".docx",
+            "uploader": "Mr Lecturer",
+            "uploadDate": "12/01/22",
+            "fileSize": "50Kb",
+            "path": "test"
+        },
+        {
+            "title": "TestDownloadFile.txt",
+            "filetype": ".txt",
+            "uploader": "Mr Lecturer",
+            "uploadDate": "12/01/22",
+            "fileSize": "50Kb",
+            "path": "C:/Users/jackg/Documents/Warwick Work/Software Dev Lifecycle/WMGTSS-FrontEnd/src/assets/test-data/TestDownloadFile.txt"            
+        }
+    ]
+    },
+    {
+        "title": "Lecture Excerises",
+        "description": "For each lecture excerise, complete all the questions and submit each within th time limit secified by the document",
+        "files": [
+            {
+                "title": "Excerise 1.pdf",
+                "filetype": ".pdf",
+                "uploader": "Mr Lecturer",
+                "uploadDate": "12/01/22",
+                "fileSize": "76Kb",
+                "path": "test"
+            },
+            {
+                "title": "Excerise 2.pdf",
+                "filetype": ".pdf",
+                "uploader": "Mr Lecturer",
+                "uploadDate": "19/01/22",
+                "fileSize": "43Kb",
+                "path": "test"
+            },
+            {
+                "title": "Excerise 3.pdf",
+                "filetype": ".pdf",
+                "uploader": "Mr Lecturer",
+                "uploadDate": "28/01/22",
+                "fileSize": "26Kb",
+                "path": "test"
+            }]
+    }
+
+  ]
+}
