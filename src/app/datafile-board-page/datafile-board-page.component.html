@@ -1,1 +1,26 @@
 <p>datafile-board-page works!</p>
+
+<body>
+    <div *ngFor="let cluster of Clusters">
+        <mat-card>
+            <mat-card-title>{{ cluster.title }}</mat-card-title>
+            <mat-card-subtitle>{{ cluster.description }}</mat-card-subtitle>
+            <mat-card-content>
+                <table>
+                    <tr *ngFor="let file of cluster.files">
+                        <td>{{file.title}}</td>
+                        <td>{{file.fileType}}</td>
+                        <td>{{file.uploader}}</td>
+                        <td>{{file.uploadDate}}</td>
+                        <td>{{file.fileSize}}</td>
+                        <a [href]="file.path" 
+                           [download]="file.title">
+                           {{ file.path }}
+                        </a>
+                    </tr>
+                </table>
+            </mat-card-content>
+        </mat-card>
+      
+      </div>  
+</body>

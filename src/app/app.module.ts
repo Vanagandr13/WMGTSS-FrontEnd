@@ -1,4 +1,4 @@
-// third party dependencies
+// External dependencies
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -6,8 +6,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
 
-// internal dependencies
+// Internal dependencies
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginPageComponent } from './login-page/login-page.component';
@@ -15,7 +16,7 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { ModulePageComponent } from './module-page/module-page.component';
 import { DatafileBoardPageComponent } from './datafile-board-page/datafile-board-page.component';
 
-import { ContentService } from './shared/services/content.service';
+import { DatafileStudentService } from './services/datafile-student-service';
 
 
 @NgModule({
@@ -32,9 +33,10 @@ import { ContentService } from './shared/services/content.service';
     BrowserAnimationsModule,
     MatToolbarModule,
     MatButtonModule,
-    MatCardModule
+    MatCardModule,
+    HttpClientModule,
   ],
-  providers: [ContentService],
+  providers: [DatafileStudentService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -7,12 +7,12 @@ import { LoginPageComponent } from './login-page/login-page.component';
 
 
 const routes: Routes = [
-  {path: '', redirectTo: '/home', pathMatch: 'full'},
-  {path: 'home', component: HomePageComponent},
-  {path: 'login', component: LoginPageComponent},
-  {path: 'module', component: ModulePageComponent},
-  {path: 'datafileBoard', component: DatafileBoardPageComponent},
-  {path: '**', redirectTo: '/home', pathMatch: 'full'}
+  {path: '', redirectTo: '/homePage', pathMatch: 'full'},
+  {path: 'homePage', component: HomePageComponent},
+  {path: 'loginPage', component: LoginPageComponent},
+  {path: 'modulePage/:moduleId', component: ModulePageComponent},
+  {path: 'datafileBoardPage/:moduleId', component: DatafileBoardPageComponent},
+  {path: '**', redirectTo: '/homePage', pathMatch: 'full'}
 ];
 
 @NgModule({

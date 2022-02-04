@@ -1,0 +1,35 @@
+{
+    "courses": {
+        "DTS": {
+            "courseId": "DTS",
+            "displayTitle": "Digital Technology Solutions",
+            "modules": {
+                "WM300": {
+                    "moduleId": "WM300",
+                    "displayTitle": "Advanced Mathematics",
+                    "boards": {
+                        "quizBoard": "Quiz Board", 
+                        "datafileBoard": "Datafile Board", 
+                        "calendarBoard": "Calendar Board",
+                        "qnaBoard": "Q&A Board"
+                    }
+                },
+                "WM350": {
+                    "moduleId": "WM350",
+                    "displayTitle": "Software Design",
+                    "boards": {
+                        "feedbackBoard": "Feedback Board", 
+                        "datafileBoard": "Datafile Board", 
+                        "QuizBoard": "Quiz Board"
+                    }
+                }
+
+            }
+        },
+        "Business Management": {
+            "courseId": "DTS",
+            "displayTitle": "Digital Technology Solutions",
+            "modules": {}
+        }
+    }
+}
