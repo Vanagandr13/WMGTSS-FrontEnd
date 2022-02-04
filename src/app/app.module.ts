@@ -16,7 +16,7 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { ModulePageComponent } from './module-page/module-page.component';
 import { DatafileBoardPageComponent } from './datafile-board-page/datafile-board-page.component';
 
-import { ContentService } from './shared/services/content.service';
+import { DatafileStudentService } from './services/datafile-student-service';
 
 
 @NgModule({
@@ -36,7 +36,7 @@ import { ContentService } from './shared/services/content.service';
     MatCardModule,
     HttpClientModule,
   ],
-  providers: [ContentService],
+  providers: [DatafileStudentService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

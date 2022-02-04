@@ -1,6 +1,4 @@
-{
-  "boardTitle": "Business Management Datafile Board",
-  "clusters": [
+[
     {
       "title": "Assessment Documents",
       "description": "These documents relate to the module final assessment. For any questions regarding the assesment please refer to your lecturer",
@@ -27,7 +25,7 @@
             "uploader": "Mr Lecturer",
             "uploadDate": "12/01/22",
             "fileSize": "50Kb",
-            "path": "C:/Users/jackg/Documents/Warwick Work/Software Dev Lifecycle/WMGTSS-FrontEnd/src/assets/test-data/TestDownloadFile.txt"            
+            "path": "C:\\Users\\jackg\\Documents\\Warwick Work\\Software Dev Lifecycle\\WMGTSS-FrontEnd\\src\\assets\\test-data\\TestDownloadFile.txt"            
         }
     ]
     },
@@ -61,5 +59,4 @@
             }]
     }
 
-  ]
-}
+]

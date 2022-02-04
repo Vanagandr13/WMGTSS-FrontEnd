@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import json from '../../assets/test-data/test-datafiles.json';
-import { DatafileStudentService } from '../Services/datafile-student-service';
+import { DatafileStudentService } from '../services/datafile-student-service';
 import { datafile, datafileBoard, datafileCluster } from '../../../../WMGTSS-BackEnd/src/DatafileTypes';// XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-datafile-board-page',
@@ -10,20 +10,20 @@ import { datafile, datafileBoard, datafileCluster } from '../../../../WMGTSS-Bac
 })
 export class DatafileBoardPageComponent implements OnInit {
   Clusters: datafileCluster[] = [];
-  DatafilePageData: datafileBoard = {boardTitle: "", clusters: new Map<number, datafileCluster>()};
+  moduleId: string = "";
 
-  constructor(private StudentService: DatafileStudentService) { }
+  constructor(private StudentService: DatafileStudentService, private route: ActivatedRoute) { 
+  }
 
   ngOnInit(): void {
+      this.route.paramMap.subscribe(params => { 
+        this.moduleId = params.get('moduleId') || ''; 
+      });
     this.getPageData();
   }
 
   getPageData() {
-    this.StudentService.getDatafileStudentView().subscribe((data: datafileBoard) => this.DatafilePageData = { ...data})
-    for (let cluster of this.DatafilePageData.clusters.values())
-    {
-      this.Clusters.push(cluster);
-    }
+    this.StudentService.getDatafileClusters(this.moduleId).subscribe((clusters:datafileCluster[]) => this.Clusters = clusters)
   }
 
 }
