@@ -3,6 +3,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, throwError, of } from 'rxjs';
 import { catchError, retry, map, tap } from 'rxjs/operators';
 import { datafile, datafileBoard, datafileCluster } from '../../../../WMGTSS-BackEnd/src/DatafileTypes'; // XXXXXXXXXXXXXXX I need to turn this into proper dependency
+import { environment } from '../../environments/environment';
 
 @Injectable({
     providedIn: 'root',
@@ -11,7 +12,7 @@ export class DatafileStudentService {
   studentViewEndpoint: string;
 
   constructor(private http: HttpClient) {
-      this.studentViewEndpoint = 'http://localhost:3000/api/datafile';
+      this.studentViewEndpoint = environment.apiURL + '/api/datafile';
   }
 
   getDatafileClusters(moduleId: string): Observable<datafileCluster[]> {

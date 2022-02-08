@@ -6,7 +6,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+
+import { fakeBackendProvider } from './helpers/fake-backend';
 
 // Internal dependencies
 import { AppRoutingModule } from './app-routing.module';
@@ -19,6 +21,9 @@ import { DatafileBoardPageComponent } from './datafile-board-page/datafile-board
 import { DatafileStudentService } from './services/datafile-student-service';
 import { FileUploadDownloadService } from './services/file-upload-download-service';
 import { FileUploadComponent } from './file-upload/file-upload.component';
+
+import { JwtInterceptor } from './helpers/jwt-interceptor'; 
+import { ErrorInterceptor } from './helpers/error-interceptor';
 
 @NgModule({
   declarations: [
@@ -39,7 +44,14 @@ import { FileUploadComponent } from './file-upload/file-upload.component';
     HttpClientModule,
     ReactiveFormsModule
   ],
-  providers: [DatafileStudentService, FileUploadDownloadService],
+  providers: [
+    DatafileStudentService,
+    FileUploadDownloadService,
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+
+    fakeBackendProvider
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

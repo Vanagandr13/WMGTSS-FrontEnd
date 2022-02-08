@@ -6,6 +6,7 @@ import { BehaviorSubject, Subject, Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { saveAs } from 'file-saver';
+import { environment } from '../../environments/environment';
 
 @Injectable({
  providedIn: 'root'
@@ -16,7 +17,7 @@ export class FileUploadDownloadService {
   private displayLoader$: Subject<boolean> = new BehaviorSubject<boolean>(false);
 
   constructor(private http: HttpClient) {
-    this.dataFileBackendURL = 'http://localhost:3000/api';
+    this.dataFileBackendURL = environment.apiURL + '/api';
    }
  
   public isLoading(): Observable<boolean> {
