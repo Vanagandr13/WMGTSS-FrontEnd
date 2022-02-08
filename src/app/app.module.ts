@@ -1,7 +1,7 @@
 // External dependencies
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -17,7 +17,8 @@ import { ModulePageComponent } from './module-page/module-page.component';
 import { DatafileBoardPageComponent } from './datafile-board-page/datafile-board-page.component';
 
 import { DatafileStudentService } from './services/datafile-student-service';
-
+import { FileUploadDownloadService } from './services/file-upload-download-service';
+import { FileUploadComponent } from './file-upload/file-upload.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { DatafileStudentService } from './services/datafile-student-service';
     LoginPageComponent,
     ModulePageComponent,
     DatafileBoardPageComponent,
+    FileUploadComponent,
   ],
   imports: [
     BrowserModule,
@@ -35,8 +37,9 @@ import { DatafileStudentService } from './services/datafile-student-service';
     MatButtonModule,
     MatCardModule,
     HttpClientModule,
+    ReactiveFormsModule
   ],
-  providers: [DatafileStudentService],
+  providers: [DatafileStudentService, FileUploadDownloadService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

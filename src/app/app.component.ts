@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Observable } from 'rxjs';
+import { FileUploadDownloadService } from './services/file-upload-download-service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +9,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'WMGTSS-FrontEnd';
+
+  public displayLoader: Observable<boolean> = this.fileService.isLoading();
+
+  constructor(private fileService: FileUploadDownloadService) {}
 }
