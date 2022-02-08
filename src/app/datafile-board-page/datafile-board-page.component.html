@@ -13,14 +13,13 @@
                         <td>{{file.uploader}}</td>
                         <td>{{file.uploadDate}}</td>
                         <td>{{file.fileSize}}</td>
-                        <a [href]="file.path" 
-                           [download]="file.title">
-                           {{ file.path }}
-                        </a>
+                        <span (click)="download(file.fileId, file.title)">download</span>&nbsp;
+                        <span (click)="remove(file.fileId)">remove</span>
                     </tr>
                 </table>
+            <app-file-uploader [clusterId]="cluster.clusterId"></app-file-uploader>    
             </mat-card-content>
         </mat-card>
-      
-      </div>  
+    </div>
+
 </body>
