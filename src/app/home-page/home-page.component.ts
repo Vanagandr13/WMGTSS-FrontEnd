@@ -9,6 +9,7 @@ import { CoursePagesService } from '../services/course-pages-service';
 export class HomePageComponent implements OnInit {
   ModulesData: {id: string, title: string}[] = [];
 
+
   constructor(private StudentService: CoursePagesService) {}
 
   ngOnInit(): void {

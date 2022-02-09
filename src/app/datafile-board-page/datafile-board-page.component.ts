@@ -7,6 +7,9 @@ import { DatafileStudentService } from '../services/datafile-student-service';
 import { datafile, datafileBoard, datafileCluster } from '../../../../WMGTSS-BackEnd/src/DatafileTypes';// XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 import { ActivatedRoute } from '@angular/router';
 import { FileUploadDownloadService } from '../services/file-upload-download-service';
+import { User } from '../models/user';
+import { Role } from '../models/role';
+import { AuthenticationService } from '../services/authentication-service';
 
 
 @Component({
@@ -22,13 +25,15 @@ export class DatafileBoardPageComponent implements OnInit {
   public showProgress: boolean;
   public showDownloadError: boolean;
   public showUploadError: boolean;
+  user: User;
  
-  constructor(private StudentService: DatafileStudentService, private uploadDownloadService: FileUploadDownloadService, private route: ActivatedRoute) { }
+  constructor(private AuthenticationService: AuthenticationService, private StudentService: DatafileStudentService, private uploadDownloadService: FileUploadDownloadService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-      this.route.paramMap.subscribe(params => { 
-        this.moduleId = params.get('moduleId') || ''; 
-      });
+    this.AuthenticationService.user.subscribe(authenticatedUser => this.user = authenticatedUser);
+    this.route.paramMap.subscribe(params => { 
+      this.moduleId = params.get('moduleId') || ''; 
+    });
     this.getPageData();
   }
 
@@ -42,5 +47,9 @@ export class DatafileBoardPageComponent implements OnInit {
  
   public remove(fileId: number):  void {
     this.uploadDownloadService.remove(fileId);
+  }
+
+  public isUserTutor(): boolean {
+    return this.user && this.user.role === Role.Tutor;
   }
 }

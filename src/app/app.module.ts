@@ -8,8 +8,6 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
-import { fakeBackendProvider } from './helpers/fake-backend';
-
 // Internal dependencies
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -46,11 +44,7 @@ import { ErrorInterceptor } from './helpers/error-interceptor';
   ],
   providers: [
     DatafileStudentService,
-    FileUploadDownloadService,
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-
-    fakeBackendProvider
+    FileUploadDownloadService
   ],
   bootstrap: [AppComponent]
 })

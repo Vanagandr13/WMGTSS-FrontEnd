@@ -3,7 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 
-import {AuthenticationService } from '../services/authentication-service';
+import { AuthenticationService } from '../services/authentication-service';
 
 @Component({
   selector: 'app-login-page',
@@ -46,19 +46,19 @@ export class LoginPageComponent implements OnInit {
       }
 
       this.loading = true;
-      this.authenticationService.login(this.loginForm.get('username').value, this.loginForm.get('password').value)
-          .pipe(first())
-          .subscribe({
-              next: () => {
-                  // get return url from query parameters or default to home page
-                  const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
-                  this.router.navigateByUrl(returnUrl);
-              },
-              error: error => {
-                  this.error = error;
-                  this.loading = false;
-              }
-      });
+      try {
+        this.authenticationService.login(this.loginForm.get('username').value, this.loginForm.get('password').value)
+      }
+      catch (error) {
+        this.error = error.message;
+        this.loading = false;
+        return;
+      }
+
+      // get return url from query parameters or default to home page
+      const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+      this.router.navigateByUrl(returnUrl);
+
   }
 }
 
