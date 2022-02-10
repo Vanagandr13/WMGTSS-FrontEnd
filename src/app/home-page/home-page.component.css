@@ -1,0 +1,7 @@
+.cropped {
+    width: 200px; /* width of container */
+    height: 200px; /* height of container */
+    border-radius: 30px;
+    object-fit: cover;
+    overflow: hidden;
+}

@@ -1,0 +1,67 @@
+@import '~@angular/material/theming';
+@include mat-core();
+
+$primary-palette: (
+    50 : #e1e2e5,
+    100 : #b4b6bd,
+    200 : #828592,
+    300 : #4f5466,
+    400 : #2a3045,
+    500 : #040b24,
+    600 : #030a20,
+    700 : #03081b,
+    800 : #020616,
+    900 : #01030d,
+    A100 : #5151ff,
+    A200 : #1e1eff,
+    A400 : #0000ea,
+    A700 : #0000d0,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #ffffff,
+        400 : #ffffff,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #ffffff,
+        A200 : #ffffff,
+        A400 : #ffffff,
+        A700 : #ffffff,
+    )
+);
+
+$secondary-palette: (
+50: #E1F6F8,
+100: #B3E9EE 
+200: #81DAE3 
+300: #4FCBD7 
+400: #29BFCF 
+500: #03B4C6 
+600: #03ADC0 
+700: #02A4B9 
+800: #029CB1 
+900: #018CA4 
+A100: #CEF7FF 
+A200: #9BEEFF 
+A400: #68E5FF 
+A700: #4FE1FF 
+);
+
+$wmgtss-primary: mat-palette($mat-indigo);
+
+$wmgtss-accent:  mat-palette($secondary-palette, 800);
+
+// The warn palette is optional (defaults to red).
+$wmgtss-warn:    mat-palette($mat-red);
+
+// Create the theme object (a Sass map containing all of the palettes).
+$wmgtss-theme: mat-light-theme($candy-app-primary, $candy-app-accent, $candy-app-warn);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($wmgtss-theme);

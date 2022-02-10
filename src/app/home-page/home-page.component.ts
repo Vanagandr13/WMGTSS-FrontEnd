@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+//import internal from 'stream';
 import { CoursePagesService } from '../services/course-pages-service';
 
 @Component({
@@ -7,8 +8,9 @@ import { CoursePagesService } from '../services/course-pages-service';
   styleUrls: ['./home-page.component.css']
 })
 export class HomePageComponent implements OnInit {
-  ModulesData: {id: string, title: string, icon: string}[] = [];
-  IconList = ['maths','programming', 'busisnessManagement', 'networking']
+  ModulesData: {id: string, title: string, icon: string}[][] = [];
+  ModulesPerRow: number = 3;
+  IconList = ['maths','programming', 'businessManagement', 'networking']
 
 
   constructor(private StudentService: CoursePagesService) {}
@@ -20,11 +22,21 @@ export class HomePageComponent implements OnInit {
   getPageData(): void {
     const courseObject = this.StudentService.getCourse("DTS");
 
+    let rowCounter: number = 0;
+    let columnCounter: number = 0;
+
     for (const key in courseObject.modules)
     {
-      this.ModulesData.push({id: courseObject.modules[key].moduleId, 
-                             title: courseObject.modules[key].displayTitle, 
-                             icon: courseObject.modules[key].icon});
+      if (columnCounter >= this.ModulesPerRow)
+      {
+        columnCounter = 0;
+        rowCounter++;
+      }
+      this.ModulesData[columnCounter].push({id: courseObject.modules[key].moduleId, 
+                                            title: courseObject.modules[key].displayTitle, 
+                                            icon: courseObject.modules[key].icon});
+
+      columnCounter++;                       
     }
   }
 

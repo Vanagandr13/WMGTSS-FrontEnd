@@ -1,8 +1,12 @@
 <p>home-page works!</p>
-    <div *ngFor="let module of ModulesData">
-        <a mat-button
-        [routerLink]="['/modulePage', module.id]"
-        routerLinkActive="active"> {{module.title}}
-        </a>
-        <img class="w3-round-xlarge" [src]='getModuleIcon(module.icon)'>
+    <div *ngFor="let row of ModulesData">
+        <div *ngFor="let module of row">
+            <div class="module-icon">
+                <a mat-raised-button mat-fab class='cropped'
+                [style.backgroundImage]='getModuleIcon(module.icon)'
+                [routerLink]="['/modulePage', module.id]"
+                routerLinkActive="active"> {{module.title}}
+                </a>
+            </div>
+        </div>
     </div>
