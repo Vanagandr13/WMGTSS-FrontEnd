@@ -12,7 +12,8 @@
                         "datafileBoard": "Datafile Board", 
                         "calendarBoard": "Calendar Board",
                         "qnaBoard": "Q&A Board"
-                    }
+                    },
+                    "icon": "maths"
                 },
                 "WM350": {
                     "moduleId": "WM350",
@@ -21,15 +22,41 @@
                         "feedbackBoard": "Feedback Board", 
                         "datafileBoard": "Datafile Board", 
                         "QuizBoard": "Quiz Board"
-                    }
+                    },
+                    "icon": "progmramming"
+                },
+                "WM320": {
+                    "moduleId": "WM320",
+                    "displayTitle": "Business Management",
+                    "boards": {
+                        "feedbackBoard": "Feedback Board", 
+                        "datafileBoard": "Datafile Board", 
+                        "QuizBoard": "Quiz Board"
+                    },
+                    "icon": "businessManagement"
+                },
+                "WM310": {
+                    "moduleId": "WM310",
+                    "displayTitle": "Networking",
+                    "boards": {
+                        "feedbackBoard": "Feedback Board", 
+                        "datafileBoard": "Datafile Board", 
+                        "QuizBoard": "Quiz Board"
+                    },
+                    "icon": "networking"
+                },
+                "WM345": {
+                    "moduleId": "WM325",
+                    "displayTitle": "Database Management",
+                    "boards": {
+                        "feedbackBoard": "Feedback Board", 
+                        "datafileBoard": "Datafile Board", 
+                        "QuizBoard": "Quiz Board"
+                    },
+                    "icon": ""
                 }
 
             }
-        },
-        "Business Management": {
-            "courseId": "DTS",
-            "displayTitle": "Digital Technology Solutions",
-            "modules": {}
         }
     }
 }

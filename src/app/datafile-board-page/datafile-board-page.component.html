@@ -14,10 +14,10 @@
                         <td>{{file.uploadDate}}</td>
                         <td>{{file.fileSize}}</td>
                         <span (click)="download(file.fileId, file.title)">download</span>&nbsp;
-                        <span (click)="remove(file.fileId)">remove</span>
+                        <span (click)="remove(file.fileId)" *ngIf="isUserTutor()">remove</span>
                     </tr>
                 </table>
-            <app-file-uploader [clusterId]="cluster.clusterId"></app-file-uploader>    
+            <app-file-uploader [clusterId]="cluster.clusterId" *ngIf="isUserTutor()"></app-file-uploader>    
             </mat-card-content>
         </mat-card>
     </div>

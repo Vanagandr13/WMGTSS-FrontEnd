@@ -4,4 +4,5 @@
         [routerLink]="['/modulePage', module.id]"
         routerLinkActive="active"> {{module.title}}
         </a>
+        <img class="w3-round-xlarge" [src]='getModuleIcon(module.icon)'>
     </div>

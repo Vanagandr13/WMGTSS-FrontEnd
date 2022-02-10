@@ -6,7 +6,7 @@
 
 import { Injectable } from '@angular/core';
 import json from '../../assets/course-data.json';
-import { Course, Module } from '../datatypes/course-data-types';
+import { Course, Module } from '../models/course-data-types';
 
 @Injectable({
     providedIn: 'root',

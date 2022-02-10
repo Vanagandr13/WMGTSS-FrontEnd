@@ -6,7 +6,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 // Internal dependencies
 import { AppRoutingModule } from './app-routing.module';
@@ -19,6 +19,8 @@ import { DatafileBoardPageComponent } from './datafile-board-page/datafile-board
 import { DatafileStudentService } from './services/datafile-student-service';
 import { FileUploadDownloadService } from './services/file-upload-download-service';
 import { FileUploadComponent } from './file-upload/file-upload.component';
+
+import { AuthenticationService } from './services/authentication-service';
 
 @NgModule({
   declarations: [
@@ -39,7 +41,11 @@ import { FileUploadComponent } from './file-upload/file-upload.component';
     HttpClientModule,
     ReactiveFormsModule
   ],
-  providers: [DatafileStudentService, FileUploadDownloadService],
+  providers: [
+    DatafileStudentService,
+    FileUploadDownloadService,
+    AuthenticationService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
