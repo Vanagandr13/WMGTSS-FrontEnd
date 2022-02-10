@@ -12,21 +12,18 @@ import { AuthenticationService } from '../services/authentication-service';
 })
 export class DatafileStudentService {
   studentViewEndpoint: string;
-  httpHeaders: HttpHeaders;
   user: User;
 
   constructor(private http: HttpClient, private authenticationService: AuthenticationService) {
     this.studentViewEndpoint = environment.apiURL + '/api/datafile';
     this.authenticationService.user.subscribe(authenticatedUser => this.user = authenticatedUser);
-    this.httpHeaders = new HttpHeaders().set('user-id', String(this.user.id))
-                                        .set('user-role', this.user.role)
-                                        .set('access-token', this.user.token);
   }
 
   getDatafileClusters(moduleId: string): Observable<datafileCluster[]> {
     let queryParams = new HttpParams();
-    queryParams = queryParams.append("moduleId", moduleId)
-    return this.http.get<datafileCluster[]>(this.studentViewEndpoint, {'headers': this.httpHeaders, params: queryParams})
+    queryParams = queryParams.append('accessToken', this.user.token);
+    queryParams = queryParams.append("moduleId", moduleId);
+    return this.http.get<datafileCluster[]>(this.studentViewEndpoint, {params: queryParams})
       .pipe(
         catchError(this.handleError<datafileCluster[]>('getDatafileStudentView'))
       )

@@ -20,8 +20,7 @@ import { DatafileStudentService } from './services/datafile-student-service';
 import { FileUploadDownloadService } from './services/file-upload-download-service';
 import { FileUploadComponent } from './file-upload/file-upload.component';
 
-import { JwtInterceptor } from './helpers/jwt-interceptor'; 
-import { ErrorInterceptor } from './helpers/error-interceptor';
+import { AuthenticationService } from './services/authentication-service';
 
 @NgModule({
   declarations: [
@@ -44,7 +43,8 @@ import { ErrorInterceptor } from './helpers/error-interceptor';
   ],
   providers: [
     DatafileStudentService,
-    FileUploadDownloadService
+    FileUploadDownloadService,
+    AuthenticationService
   ],
   bootstrap: [AppComponent]
 })

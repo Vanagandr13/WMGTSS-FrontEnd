@@ -16,7 +16,6 @@ import { AuthenticationService } from '../services/authentication-service';
 })
 export class FileUploadDownloadService {
   dataFileBackendURL: string;
-  httpHeaders: HttpHeaders;
   user: User;
 
   private displayLoader$: Subject<boolean> = new BehaviorSubject<boolean>(false);
@@ -24,9 +23,6 @@ export class FileUploadDownloadService {
   constructor(private http: HttpClient, private authenticationService: AuthenticationService) {
     this.authenticationService.user.subscribe(authenticatedUser => this.user = authenticatedUser);
     this.dataFileBackendURL = environment.apiURL + '/api';
-    this.httpHeaders = new HttpHeaders().set('user-id', String(this.user.id))
-                                        .set('user-role', this.user.role)
-                                        .set('access-token', this.user.token);
    }
  
   public isLoading(): Observable<boolean> {
@@ -35,8 +31,10 @@ export class FileUploadDownloadService {
  
   public upload(fileName: string, clusterId: Number, fileContent: string): void {
     this.displayLoader$.next(true);
-    const body = { 'headers': this.httpHeaders, name: fileName, clusterId: clusterId, content: fileContent};
-    this.http.put(this.dataFileBackendURL + '/file/upload', body)
+    let queryParams = new HttpParams();
+    queryParams = queryParams.append('accessToken', this.user.token);
+    const body = {name: fileName, clusterId: clusterId, content: fileContent};
+    this.http.put(this.dataFileBackendURL + '/file/upload', body, {params:queryParams})
     .pipe(finalize(() => this.displayLoader$.next(false)))
     .subscribe(res => {
     }, error => {
@@ -47,8 +45,9 @@ export class FileUploadDownloadService {
   public download(fileId: number, fileName: string): void {
     let queryParams = new HttpParams();
     let fileType = fileName.split('.').pop()
+    queryParams = queryParams.append('accessToken', this.user.token);
     queryParams = queryParams.append("fileId", fileId);
-    this.http.get(this.dataFileBackendURL + '/file/download', {'headers': this.httpHeaders, params: queryParams, observe: 'response', responseType: 'blob'}).subscribe(response => {
+    this.http.get(this.dataFileBackendURL + '/file/download', {params: queryParams, observe: 'response', responseType: 'blob'}).subscribe(response => {
       //let downloadURL = window.open(window.URL.createObjectURL(response));
       //saveAs(downloadURL);
       const blob: Blob = new Blob([response.body], {type: fileType});
@@ -66,9 +65,9 @@ export class FileUploadDownloadService {
  
   public remove(fileId: number): void {
     let queryParams = new HttpParams();
-    queryParams = queryParams.append("fileId", fileId)
-    this.http.delete(this.dataFileBackendURL + '/file/delete', {'headers': this.httpHeaders, params: queryParams}).subscribe(() => { 
+    queryParams = queryParams.append('accessToken', this.user.token);
+    queryParams = queryParams.append("fileId", fileId);
+    this.http.delete(this.dataFileBackendURL + '/file/delete', {params: queryParams}).subscribe(() => { 
     });
   }
- 
 }

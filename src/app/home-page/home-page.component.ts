@@ -7,7 +7,8 @@ import { CoursePagesService } from '../services/course-pages-service';
   styleUrls: ['./home-page.component.css']
 })
 export class HomePageComponent implements OnInit {
-  ModulesData: {id: string, title: string}[] = [];
+  ModulesData: {id: string, title: string, icon: string}[] = [];
+  IconList = ['maths','programming', 'busisnessManagement', 'networking']
 
 
   constructor(private StudentService: CoursePagesService) {}
@@ -21,7 +22,20 @@ export class HomePageComponent implements OnInit {
 
     for (const key in courseObject.modules)
     {
-      this.ModulesData.push({id: courseObject.modules[key].moduleId, title: courseObject.modules[key].displayTitle});
+      this.ModulesData.push({id: courseObject.modules[key].moduleId, 
+                             title: courseObject.modules[key].displayTitle, 
+                             icon: courseObject.modules[key].icon});
+    }
+  }
+
+  getModuleIcon(iconName: string): string {
+    if(this.IconList.indexOf(iconName) > -1)
+    {
+      return '../../assets/images/' + iconName + 'Icon.jpg'
+    }
+    else
+    {
+      return '../../assets/images/moduleIcon.jpg' // use default image if the module doesn't have a valid icon
     }
   }
 }

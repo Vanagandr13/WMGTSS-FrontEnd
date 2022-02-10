@@ -3,8 +3,6 @@ import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
-import jwt from 'jsonwebtoken';
-import fs from 'fs';
 
 import { Role } from '../models/role';
 import { User } from '../models/user';
@@ -28,7 +26,6 @@ export class AuthenticationService {
     constructor(private router: Router, private http: HttpClient) {
         this.userSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('user')));
         this.user = this.userSubject.asObservable();
-        this.privateKey = fs.readFileSync('../../assets/privateKey.txt', 'utf8');
     }
 
     public get userValue(): User {
@@ -46,7 +43,7 @@ export class AuthenticationService {
                 firstName: user.firstName,
                 lastName: user.lastName,
                 role: user.role,
-                token: this.createUserToken(user.id, user.role)
+                token: 'fake-jwt-token,' + user.id + ',' + user.role
             };
             
             // store user details and jwt token in local storage to keep user logged in between page refreshes
@@ -61,13 +58,5 @@ export class AuthenticationService {
         localStorage.removeItem('user');
         this.userSubject.next(null);
         this.router.navigate(['/loginPage']);
-    }
-
-    private createUserToken(id: string, role: string) {
-        return jwt.sign({}, this.privateKey, {
-            algorithm: 'RS256',
-            subject: id + ',' + role
-        })
-
     }
 }
