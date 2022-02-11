@@ -5,6 +5,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { FileUploadDownloadService } from '../services/file-upload-download-service';
+import { DatafileStudentService } from '../services/datafile-student-service';
 
 @Component({
  selector: 'app-file-uploader',
@@ -13,6 +14,7 @@ import { FileUploadDownloadService } from '../services/file-upload-download-serv
 })
 export class FileUploadComponent {
   @Input() public clusterId: Number;
+  @Input() public moduleId: string;
 
  public formGroup = this.fb.group({
    file: [null, Validators.required]
@@ -20,8 +22,7 @@ export class FileUploadComponent {
 
  private fileName: string;
 
-
- constructor(private fb: FormBuilder, private fileService: FileUploadDownloadService, private route: ActivatedRoute) { }
+ constructor(private fb: FormBuilder, private StudentService: DatafileStudentService, private FileService: FileUploadDownloadService, private route: ActivatedRoute) { }
 
  public onFileChange(event) {
    const reader = new FileReader();
@@ -40,6 +41,6 @@ export class FileUploadComponent {
  }
 
 public onSubmit(): void {
-   this.fileService.upload(this.fileName, this.clusterId, this.formGroup.get('file').value);
+   this.FileService.uploadFile(this.fileName, this.clusterId, this.moduleId, this.formGroup.get('file').value);
   }
 }

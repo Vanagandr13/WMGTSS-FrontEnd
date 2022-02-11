@@ -10,6 +10,7 @@ import { FileUploadDownloadService } from '../services/file-upload-download-serv
 import { User } from '../models/user';
 import { Role } from '../models/role';
 import { AuthenticationService } from '../services/authentication-service';
+import { CoursePagesService } from '../services/course-pages-service';
 
 
 @Component({
@@ -20,6 +21,7 @@ import { AuthenticationService } from '../services/authentication-service';
 export class DatafileBoardPageComponent implements OnInit {
   Clusters: datafileCluster[] = [];
   moduleId: string = "";
+  boardTitle: string = "";
   public fileInDownload: string;
   public percentage: number;
   public showProgress: boolean;
@@ -27,10 +29,11 @@ export class DatafileBoardPageComponent implements OnInit {
   public showUploadError: boolean;
   user: User;
  
-  constructor(private AuthenticationService: AuthenticationService, private StudentService: DatafileStudentService, private uploadDownloadService: FileUploadDownloadService, private route: ActivatedRoute) { }
+  constructor(private ModuleDataService: CoursePagesService, private AuthenticationService: AuthenticationService, private StudentService: DatafileStudentService, private uploadDownloadService: FileUploadDownloadService, private route: ActivatedRoute) { }
 
-  ngOnInit(): void {
+  ngOnInit(): void { // XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX remove unused file feilds from the page
     this.AuthenticationService.user.subscribe(authenticatedUser => this.user = authenticatedUser);
+    this.StudentService.datafileBoardData.subscribe(datafilePageData => this.Clusters = datafilePageData);
     this.route.paramMap.subscribe(params => { 
       this.moduleId = params.get('moduleId') || ''; 
     });
@@ -38,18 +41,21 @@ export class DatafileBoardPageComponent implements OnInit {
   }
 
   getPageData() {
-    this.StudentService.getDatafileClusters(this.moduleId).subscribe((clusters:datafileCluster[]) => this.Clusters = clusters)
+    const moduleObject = this.ModuleDataService.getModule("DTS", this.moduleId);
+    this.StudentService.getDatafileClusters(this.moduleId);
   }
 
   public download(fileId: number, fileName: string):  void {
-    this.uploadDownloadService.download(fileId, fileName);
+    this.uploadDownloadService.downloadFile(fileId, fileName);
   }
  
   public remove(fileId: number):  void {
-    this.uploadDownloadService.remove(fileId);
+    this.uploadDownloadService.removeFile(fileId, this.moduleId);
   }
 
   public isUserTutor(): boolean {
     return this.user && this.user.role === Role.Tutor;
   }
+
+  public createCluster() {} 
 }

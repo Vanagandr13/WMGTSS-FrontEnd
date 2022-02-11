@@ -1,13 +1,17 @@
 <!-- app/app.component.html -->
 
-<mat-toolbar color="primary">
-  <h1><span class="light">SUPER</span>LOGO</h1>
+<mat-toolbar color="primary" class="banner">
+  <h1><img class="cropped-image" 
+       src="../assets/images/wmg-logo.png" 
+       [routerLink]="['/homePage']"
+       routerLinkActive="active"></h1>
   <span class="spacer"></span>
-  <a mat-button
+  <button mat-raised-button class="button" color="accent"
   [routerLink]="['home']"
-  routerLinkActive="active">HOME</a>
-  <a mat-button
-  (click)="logout()">LOGOUT</a>
+  routerLinkActive="active">HOME</button>
+  <button mat-raised-button class="button" color="accent"
+  (click)="logout()">LOGOUT</button>
 </mat-toolbar>
 
-<router-outlet></router-outlet>
+<router-outlet ></router-outlet>
+  

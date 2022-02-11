@@ -1,12 +1,18 @@
-<p>home-page works!</p>
-    <div *ngFor="let row of ModulesData">
-        <div *ngFor="let module of row">
-            <div class="module-icon">
-                <a mat-raised-button mat-fab class='cropped'
-                [style.backgroundImage]='getModuleIcon(module.icon)'
-                [routerLink]="['/modulePage', module.id]"
-                routerLinkActive="active"> {{module.title}}
-                </a>
-            </div>
-        </div>
+<div class="pageTitle">Welcome to the WMGTSS</div>
+<div class="pageSubTitle">DTS Homepage</div>
+<div class="module-list-container">
+    <div class="module-list">
+        <ng-container *ngFor="let module of ModulesData">
+            <mat-card class="module-icon">
+                <mat-card-content>
+                    <img class="cropped-image" [src]="getModuleIcon(module.icon)"[routerLink]="['/modulePage', module.id]"
+                    routerLinkActive="active">
+                    <button mat-raised-button  class='button' color="accent"
+                    [routerLink]="['/modulePage', module.id]"
+                    routerLinkActive="active"> {{module.title}}
+                    </button>
+                </mat-card-content>
+            </mat-card>
+        </ng-container>
     </div>
+</div>

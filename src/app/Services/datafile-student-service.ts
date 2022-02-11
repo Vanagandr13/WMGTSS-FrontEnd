@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Observable, throwError, of } from 'rxjs';
+import { Observable, throwError, of, BehaviorSubject } from 'rxjs';
 import { catchError, retry, map, tap } from 'rxjs/operators';
 import { datafile, datafileBoard, datafileCluster } from '../../../../WMGTSS-BackEnd/src/DatafileTypes'; // XXXXXXXXXXXXXXX I need to turn this into proper dependency
 import { environment } from '../../environments/environment';
@@ -11,22 +11,30 @@ import { AuthenticationService } from '../services/authentication-service';
     providedIn: 'root',
 })
 export class DatafileStudentService {
+  private datafileBoardSubject: BehaviorSubject<datafileCluster[]>;
+  public datafileBoardData: Observable<datafileCluster[]>;
   studentViewEndpoint: string;
   user: User;
 
   constructor(private http: HttpClient, private authenticationService: AuthenticationService) {
     this.studentViewEndpoint = environment.apiURL + '/api/datafile';
     this.authenticationService.user.subscribe(authenticatedUser => this.user = authenticatedUser);
+    this.datafileBoardSubject = new BehaviorSubject<datafileCluster[]>([]);
+    this.datafileBoardData = this.datafileBoardSubject.asObservable();
   }
 
-  getDatafileClusters(moduleId: string): Observable<datafileCluster[]> {
+  getDatafileClusters(moduleId: string) {
     let queryParams = new HttpParams();
     queryParams = queryParams.append('accessToken', this.user.token);
     queryParams = queryParams.append("moduleId", moduleId);
-    return this.http.get<datafileCluster[]>(this.studentViewEndpoint, {params: queryParams})
-      .pipe(
-        catchError(this.handleError<datafileCluster[]>('getDatafileStudentView'))
-      )
+    this.http.get<datafileCluster[]>(this.studentViewEndpoint, {params: queryParams})
+    .pipe(
+      catchError(this.handleError<datafileCluster[]>('getDatafileStudentView'))
+    ).subscribe(response => { 
+      this.datafileBoardSubject.next(response);
+
+    });
+      
   }
 
   private handleError<T>(operation = 'operation', result?: T) {

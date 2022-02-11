@@ -35,33 +35,44 @@ $primary-palette: (
 );
 
 $secondary-palette: (
-50: #E1F6F8,
-100: #B3E9EE 
-200: #81DAE3 
-300: #4FCBD7 
-400: #29BFCF 
-500: #03B4C6 
-600: #03ADC0 
-700: #02A4B9 
-800: #029CB1 
-900: #018CA4 
-A100: #CEF7FF 
-A200: #9BEEFF 
-A400: #68E5FF 
-A700: #4FE1FF 
+    50 : #E1F6F8,
+    100 : #B3E9EE, 
+    200 : #81DAE3,
+    300 : #4FCBD7, 
+    400 : #29BFCF, 
+    500 : #03B4C6, 
+    600 : #03ADC0, 
+    700 : #02A4B9, 
+    800 : #029CB1, 
+    900 : #018CA4, 
+    A100 : #CEF7FF, 
+    A200 : #9BEEFF,
+    A400 : #68E5FF, 
+    A700 : #4FE1FF,
+    contrast: (
+        50: $black-87-opacity,
+        100: $black-87-opacity,
+        200: $black-87-opacity,
+        300: $black-87-opacity,
+        400: $black-87-opacity,
+        500: white,
+        600: white,
+        700: white,
+        800: white,
+        900: white,
+        A100: $black-87-opacity,
+        A200: $black-87-opacity,
+        A400: $black-87-opacity,
+        A700: white,       
+    )
 );
 
-$wmgtss-primary: mat-palette($mat-indigo);
+$wmgtss-primary: mat-palette($primary-palette, 500);
 
-$wmgtss-accent:  mat-palette($secondary-palette, 800);
+$wmgtss-accent: mat-palette($secondary-palette);
 
-// The warn palette is optional (defaults to red).
-$wmgtss-warn:    mat-palette($mat-red);
 
 // Create the theme object (a Sass map containing all of the palettes).
-$wmgtss-theme: mat-light-theme($candy-app-primary, $candy-app-accent, $candy-app-warn);
+$wmgtss-theme: mat-light-theme($wmgtss-primary, $wmgtss-accent);
 
-// Include theme styles for core and each component used in your app.
-// Alternatively, you can import and @include the theme mixins for each component
-// that you are using.
 @include angular-material-theme($wmgtss-theme);
