@@ -13,13 +13,13 @@ import { FileUploadDownloadService } from '../services/file-upload-download-serv
 })
 export class FileUploadComponent {
   @Input() public clusterId: Number;
+  @Input() public moduleId: string;
 
  public formGroup = this.fb.group({
    file: [null, Validators.required]
  });
 
  private fileName: string;
-
 
  constructor(private fb: FormBuilder, private fileService: FileUploadDownloadService, private route: ActivatedRoute) { }
 
@@ -40,6 +40,6 @@ export class FileUploadComponent {
  }
 
 public onSubmit(): void {
-   this.fileService.upload(this.fileName, this.clusterId, this.formGroup.get('file').value);
+   this.fileService.uploadFile(this.fileName, this.clusterId, this.moduleId, this.formGroup.get('file').value);
   }
 }

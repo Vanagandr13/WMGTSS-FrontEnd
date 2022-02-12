@@ -1,0 +1,21 @@
+.dialogEntryBoxes {
+    display: flex;
+    flex-direction: column;
+    height: 80%
+}
+
+.title {
+    width: 300px;
+    height: 30px;
+}
+
+.description {
+    width: 300px;
+    height: 180px;
+    text-align: left;
+    text-align: left;
+}
+
+.label {
+    font-family:Arial, Helvetica, sans-serif;
+}

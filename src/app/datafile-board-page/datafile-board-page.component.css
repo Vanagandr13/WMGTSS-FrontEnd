@@ -1,0 +1,28 @@
+
+.datafile-board-page {
+    display: flex;
+}
+
+.datafile-cards {
+    display: flex;
+    flex-direction:column;
+}
+
+.card {
+    margin-top: 10px;
+    width: 600px;
+}
+
+.button {
+    margin-top: 10px;
+    margin-right: 5px;
+    height: 30px;
+    width: 120px;
+}
+
+.create-button {
+    margin-top: 10px;
+    margin-left: 10px;
+    height: 50px;
+    width: 150px;
+}

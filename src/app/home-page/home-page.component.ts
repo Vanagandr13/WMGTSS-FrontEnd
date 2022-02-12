@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+//import internal from 'stream';
 import { CoursePagesService } from '../services/course-pages-service';
 
 @Component({
@@ -8,7 +9,8 @@ import { CoursePagesService } from '../services/course-pages-service';
 })
 export class HomePageComponent implements OnInit {
   ModulesData: {id: string, title: string, icon: string}[] = [];
-  IconList = ['maths','programming', 'busisnessManagement', 'networking']
+  ModulesPerRow: number = 3;
+  IconList = ['maths','programming', 'businessManagement', 'networking']
 
 
   constructor(private StudentService: CoursePagesService) {}
@@ -24,7 +26,7 @@ export class HomePageComponent implements OnInit {
     {
       this.ModulesData.push({id: courseObject.modules[key].moduleId, 
                              title: courseObject.modules[key].displayTitle, 
-                             icon: courseObject.modules[key].icon});
+                             icon: courseObject.modules[key].icon});               
     }
   }
 

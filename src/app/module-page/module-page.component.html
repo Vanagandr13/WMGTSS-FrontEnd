@@ -1,7 +1,11 @@
-<p>module-page works!</p>
-<div *ngFor="let board of boardsData">
-    <a mat-button
-    [routerLink]="['/' + board.id + 'Page', moduleId]"
-    routerLinkActive="active">{{board.title}}
-    </a>
+<div class="pageTitle">{{pageTitle}}</div>
+<div class="board-list-container">
+    <div class="board-list">
+        <ng-container *ngFor="let board of boardsData">
+            <button mat-raised-button class="button" color="accent"
+            [routerLink]="['/' + board.id + 'Page', moduleId]"
+            routerLinkActive="active">{{board.title}}
+            </button>
+        </ng-container>
+    </div>
 </div>

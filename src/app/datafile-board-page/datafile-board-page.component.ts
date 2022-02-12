@@ -3,13 +3,16 @@
 
 
 import { Component, OnInit } from '@angular/core';
-import { DatafileStudentService } from '../services/datafile-student-service';
+import { DatafilePageDataService } from '../services/datafile-page-data-service';
 import { datafile, datafileBoard, datafileCluster } from '../../../../WMGTSS-BackEnd/src/DatafileTypes';// XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+import {MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { FileUploadDownloadService } from '../services/file-upload-download-service';
 import { User } from '../models/user';
 import { Role } from '../models/role';
 import { AuthenticationService } from '../services/authentication-service';
+import { CoursePagesService } from '../services/course-pages-service';
+import { ClusterDialogComponent } from '../cluster-dialog/cluster-dialog.component';
 
 
 @Component({
@@ -20,6 +23,7 @@ import { AuthenticationService } from '../services/authentication-service';
 export class DatafileBoardPageComponent implements OnInit {
   Clusters: datafileCluster[] = [];
   moduleId: string = "";
+  boardTitle: string = "";
   public fileInDownload: string;
   public percentage: number;
   public showProgress: boolean;
@@ -27,10 +31,16 @@ export class DatafileBoardPageComponent implements OnInit {
   public showUploadError: boolean;
   user: User;
  
-  constructor(private AuthenticationService: AuthenticationService, private StudentService: DatafileStudentService, private uploadDownloadService: FileUploadDownloadService, private route: ActivatedRoute) { }
+  constructor(private moduleDataService: CoursePagesService, 
+              private authenticationService: AuthenticationService,
+              private datafilePageService: DatafilePageDataService, 
+              private uploadDownloadService: FileUploadDownloadService,
+              private clusterDialog: MatDialog, 
+              private route: ActivatedRoute) { }
 
-  ngOnInit(): void {
-    this.AuthenticationService.user.subscribe(authenticatedUser => this.user = authenticatedUser);
+  ngOnInit(): void { // XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX remove unused file fields from the page
+    this.authenticationService.user.subscribe(authenticatedUser => this.user = authenticatedUser);
+    this.datafilePageService.datafileBoardData.subscribe(datafilePageData => this.Clusters = datafilePageData);
     this.route.paramMap.subscribe(params => { 
       this.moduleId = params.get('moduleId') || ''; 
     });
@@ -38,18 +48,49 @@ export class DatafileBoardPageComponent implements OnInit {
   }
 
   getPageData() {
-    this.StudentService.getDatafileClusters(this.moduleId).subscribe((clusters:datafileCluster[]) => this.Clusters = clusters)
+    const moduleObject = this.moduleDataService.getModule("DTS", this.moduleId);
+    this.datafilePageService.getDatafileClusters(this.moduleId);
   }
 
   public download(fileId: number, fileName: string):  void {
-    this.uploadDownloadService.download(fileId, fileName);
+    this.uploadDownloadService.downloadFile(fileId, fileName);
   }
  
   public remove(fileId: number):  void {
-    this.uploadDownloadService.remove(fileId);
+    this.uploadDownloadService.removeFile(fileId, this.moduleId);
   }
 
   public isUserTutor(): boolean {
     return this.user && this.user.role === Role.Tutor;
+  }
+
+  public createCluster() {
+    const dialog = this.clusterDialog.open(ClusterDialogComponent, {
+      width: '500px',
+      height: '500px',
+      data: {title: "", description: "", dialogTitle:"Create Cluster"}
+    });
+  
+    dialog.afterClosed().subscribe(result => {
+      this.datafilePageService.createCluster(this.moduleId, result['title'], result['description'])
+    });
+  }
+
+  public editCluster(clusterId) {
+    let cluster: datafileCluster = this.Clusters.find(x => x.clusterId == clusterId)
+
+    const dialog = this.clusterDialog.open(ClusterDialogComponent, {
+      width: '500px',
+      height: '500px',
+      data: {title: cluster.title, description: cluster.description, dialogTitle:"Edit Cluster"}
+    });
+  
+    dialog.afterClosed().subscribe(result => {
+      this.datafilePageService.modifyCluster(this.moduleId, cluster.clusterId, result['title'], result['description']);
+    });
+  }
+
+  public deleteCluster(clusterId) {
+    this.datafilePageService.removeCluster(this.moduleId, clusterId);
   }
 }

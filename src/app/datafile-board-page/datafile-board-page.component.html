@@ -1,25 +1,29 @@
-<p>datafile-board-page works!</p>
 
-<body>
+<div class="datafile-board-page">
+    <div class="datafile-cards">
     <div *ngFor="let cluster of Clusters">
-        <mat-card>
+        <mat-card class="card">
             <mat-card-title>{{ cluster.title }}</mat-card-title>
             <mat-card-subtitle>{{ cluster.description }}</mat-card-subtitle>
             <mat-card-content>
                 <table>
                     <tr *ngFor="let file of cluster.files">
-                        <td>{{file.title}}</td>
-                        <td>{{file.fileType}}</td>
-                        <td>{{file.uploader}}</td>
-                        <td>{{file.uploadDate}}</td>
-                        <td>{{file.fileSize}}</td>
-                        <span (click)="download(file.fileId, file.title)">download</span>&nbsp;
+                        <span (click)="download(file.fileId, file.title)">{{file.title}}</span>&nbsp;
                         <span (click)="remove(file.fileId)" *ngIf="isUserTutor()">remove</span>
                     </tr>
                 </table>
-            <app-file-uploader [clusterId]="cluster.clusterId" *ngIf="isUserTutor()"></app-file-uploader>    
+            <app-file-uploader [clusterId]="cluster.clusterId" [moduleId]="moduleId" *ngIf="isUserTutor()"></app-file-uploader>
+            <div *ngIf="isUserTutor()">
+                <button class="button" mat-raised-button (click)="editCluster(cluster.clusterId)">Edit Cluster</button>
+                <button class="button" mat-raised-button (click)="deleteCluster(cluster.clusterId)">Delete Cluster</button>
+            </div>    
             </mat-card-content>
         </mat-card>
     </div>
+    </div>
+    <button class="create-button"
+        mat-raised-button (click)="createCluster()" 
+        *ngIf="isUserTutor()">Create Cluster
+    </button>
+</div>
 
-</body>

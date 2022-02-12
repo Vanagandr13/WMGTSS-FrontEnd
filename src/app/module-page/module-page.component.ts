@@ -9,7 +9,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class ModulePageComponent implements OnInit {
   moduleId: string = "";
-  displayTitle: string = "";
+  pageTitle: string = "";
   boardsData: {id: string, title: string}[] = [];
 
   constructor(private StudentService: CoursePagesService, private route: ActivatedRoute) { }
@@ -24,6 +24,8 @@ export class ModulePageComponent implements OnInit {
 
   getPageData(): void {
     const moduleObject = this.StudentService.getModule("DTS", this.moduleId);
+
+    this.pageTitle = moduleObject.displayTitle;
 
     for (const key in moduleObject.boards)
     {

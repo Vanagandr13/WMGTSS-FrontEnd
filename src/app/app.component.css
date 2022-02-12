@@ -1,0 +1,24 @@
+.cropped-image {
+    display: block;
+    width: 250px; /* width of container */
+    height: 130px; /* height of container */
+    border-radius: 10px;
+    object-fit: fill;
+    overflow: hidden;
+}
+
+.banner {
+    height: 150px;
+    border-radius: 10px;
+}
+
+.spacer {
+    width: 70%;
+}
+
+.button {
+    padding: 5px;
+    width: 5%;
+    margin: 10px;
+    font-size: medium;
+}
