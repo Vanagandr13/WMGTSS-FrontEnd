@@ -9,7 +9,7 @@ import { saveAs } from 'file-saver';
 import { environment } from '../../environments/environment';
 import { User } from '../models/user';
 import { AuthenticationService } from '../services/authentication-service';
-import { DatafileStudentService } from '../services/datafile-student-service';
+import { DatafilePageDataService } from './datafile-page-data-service';
 
 
 @Injectable({
@@ -21,7 +21,7 @@ export class FileUploadDownloadService {
 
   private displayLoader$: Subject<boolean> = new BehaviorSubject<boolean>(false);
 
-  constructor(private http: HttpClient, private authenticationService: AuthenticationService, private datafileStudentService: DatafileStudentService) {
+  constructor(private http: HttpClient, private authenticationService: AuthenticationService, private datafilePageDataService: DatafilePageDataService) {
     this.authenticationService.user.subscribe(authenticatedUser => this.user = authenticatedUser);
     this.dataFileBackendURL = environment.apiURL + '/api';
    }
@@ -38,7 +38,7 @@ export class FileUploadDownloadService {
     this.http.put(this.dataFileBackendURL + '/file/upload', body, {params:queryParams})
     .subscribe(() => {
       // Get the updated page
-      this.datafileStudentService.getDatafileClusters(moduleId);
+      this.datafilePageDataService.getDatafileClusters(moduleId);
     });
   }
  
@@ -48,8 +48,6 @@ export class FileUploadDownloadService {
     queryParams = queryParams.append('accessToken', this.user.token);
     queryParams = queryParams.append("fileId", fileId);
     this.http.get(this.dataFileBackendURL + '/file/download', {params: queryParams, observe: 'response', responseType: 'blob'}).subscribe(response => {
-      //let downloadURL = window.open(window.URL.createObjectURL(response));
-      //saveAs(downloadURL);
       const blob: Blob = new Blob([response.body], {type: fileType});
       const objectUrl: string = URL.createObjectURL(blob);
       const anchor: HTMLAnchorElement = document.createElement('a') as HTMLAnchorElement;
@@ -68,7 +66,7 @@ export class FileUploadDownloadService {
     queryParams = queryParams.append("fileId", fileId);
     this.http.delete(this.dataFileBackendURL + '/file/delete', {params: queryParams}).subscribe(() => {
       // Get the updated page
-      this.datafileStudentService.getDatafileClusters(moduleId); 
+      this.datafilePageDataService.getDatafileClusters(moduleId); 
     });
   }
 }

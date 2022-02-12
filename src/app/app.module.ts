@@ -1,12 +1,16 @@
 // External dependencies
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input'
+import { MatDialogModule } from '@angular/material/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 
 // Internal dependencies
 import { AppRoutingModule } from './app-routing.module';
@@ -16,9 +20,10 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { ModulePageComponent } from './module-page/module-page.component';
 import { DatafileBoardPageComponent } from './datafile-board-page/datafile-board-page.component';
 
-import { DatafileStudentService } from './services/datafile-student-service';
+import { DatafilePageDataService } from './services/datafile-page-data-service';
 import { FileUploadDownloadService } from './services/file-upload-download-service';
 import { FileUploadComponent } from './file-upload/file-upload.component';
+import { ClusterDialogComponent } from './cluster-dialog/cluster-dialog.component';
 
 import { AuthenticationService } from './services/authentication-service';
 
@@ -30,8 +35,10 @@ import { AuthenticationService } from './services/authentication-service';
     ModulePageComponent,
     DatafileBoardPageComponent,
     FileUploadComponent,
+    ClusterDialogComponent
   ],
   imports: [
+    FormsModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -39,10 +46,14 @@ import { AuthenticationService } from './services/authentication-service';
     MatButtonModule,
     MatCardModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatDialogModule,
+    MatInputModule
+
   ],
   providers: [
-    DatafileStudentService,
+    DatafilePageDataService,
     FileUploadDownloadService,
     AuthenticationService
   ],
