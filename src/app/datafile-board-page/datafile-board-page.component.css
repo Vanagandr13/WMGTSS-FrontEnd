@@ -13,6 +13,24 @@
     width: 600px;
 }
 
+.file-table {
+    width: 580;
+}
+
+.remove-file-button {
+    height: 30px;
+}
+
+.table-cell {
+    text-align: right;
+    padding: 5px;
+}
+
+.file-name {
+    text-align: left;
+    padding: 5px;
+}
+
 .button {
     margin-top: 10px;
     margin-right: 5px;
