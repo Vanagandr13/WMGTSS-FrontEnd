@@ -1,6 +1,16 @@
+// External Imports
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ActivatedRoute } from '@angular/router'
 
+// Internal Imports
+import { CoursePagesService } from '../services/course-pages-service';
 import { ModulePageComponent } from './module-page.component';
+import { MockActiveRouteService } from '../tests/mock-services';
+
+const mockActivateRouteService = new MockActiveRouteService();
+const mockCoursePagesService = new CoursePagesService();
+
+mockCoursePagesService.getCourse("DTS");
 
 describe('ModulePageComponent', () => {
   let component: ModulePageComponent;
@@ -8,7 +18,11 @@ describe('ModulePageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ModulePageComponent ]
+      declarations: [ ModulePageComponent ],
+      providers: [
+        { provide: ActivatedRoute, useValue: mockActivateRouteService },
+        { provide: CoursePagesService, useValue: mockCoursePagesService }
+       ]
     })
     .compileComponents();
   });

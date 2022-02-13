@@ -1,10 +1,13 @@
+// External Imports
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable, throwError, of, BehaviorSubject } from 'rxjs';
 import { catchError, retry, map, tap } from 'rxjs/operators';
-import { datafile, datafileBoard, datafileCluster } from '../../../../WMGTSS-BackEnd/src/DatafileTypes'; // XXXXXXXXXXXXXXX I need to turn this into proper dependency
+
+// Internal Imports
+import { datafileCluster } from '../../../../WMGTSS-BackEnd/src/DatafileTypes'; // In the final system these types will be made into aproper dependency
 import { environment } from '../../environments/environment';
-import { User } from '../models/user';
+import { User } from '../models/user-data-types';
 import { AuthenticationService } from './authentication-service';
 
 @Injectable({

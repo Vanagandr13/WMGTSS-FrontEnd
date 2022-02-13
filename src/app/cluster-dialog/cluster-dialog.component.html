@@ -2,14 +2,14 @@
 <div mat-dialog-content class="dialogEntryBoxes" >
   <mat-label class="label">Edit title:</mat-label>
   <mat-form-field appearance="fill">
-    <input matInput class="title" [(ngModel)]="data.title">
+    <input matInput id="title-entry-box" class="title" [(ngModel)]="data.title">
   </mat-form-field>
   <mat-label class="label">Edit description:</mat-label>
   <mat-form-field class="description" appearance="fill">
-    <textarea matInput class="description" [(ngModel)]="data.description"></textarea>
+    <textarea matInput id="description-entry-box" class="description" [(ngModel)]="data.description"></textarea>
   </mat-form-field>
 </div>
 <div mat-dialog-actions>
-  <button mat-button (click)="onCancel()">Cancel</button>
-  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Ok</button>
+  <button mat-button id="cancel-button" (click)="onCancel()">Cancel</button>
+  <button mat-button id="submit-button" [mat-dialog-close]="data" cdkFocusInitial>Ok</button>
 </div>

@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
 import { FileUploadDownloadService } from './services/file-upload-download-service';
-import {AuthenticationService } from './services/authentication-service';
-import { User } from './models/user';
-import { Role } from './models/role';
+import { AuthenticationService } from './services/authentication-service';
+import { User, Role } from './models/user-data-types';
 
 @Component({
   selector: 'app-root',

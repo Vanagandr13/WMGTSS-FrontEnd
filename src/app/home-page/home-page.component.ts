@@ -1,5 +1,7 @@
+// External Imports
 import { Component, OnInit } from '@angular/core';
-//import internal from 'stream';
+
+// Internal Imports
 import { CoursePagesService } from '../services/course-pages-service';
 
 @Component({
