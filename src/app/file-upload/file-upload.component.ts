@@ -1,9 +1,12 @@
 // The code in this file has been derived from the example code at
 // https://www.twilio.com/blog/transfer-files-data-javascript-applications-angular-node-js
 
+// External Imports
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+
+// Internal Imports
 import { FileUploadDownloadService } from '../services/file-upload-download-service';
 
 @Component({
@@ -15,13 +18,13 @@ export class FileUploadComponent {
   @Input() public clusterId: Number;
   @Input() public moduleId: string;
 
- public formGroup = this.fb.group({
+ public formGroup = this.formBuilder.group({
    file: [null, Validators.required]
  });
 
  private fileName: string;
 
- constructor(private fb: FormBuilder, private fileService: FileUploadDownloadService, private route: ActivatedRoute) { }
+ constructor(private formBuilder: FormBuilder, private fileService: FileUploadDownloadService, private route: ActivatedRoute) { }
 
  public onFileChange(event) {
    const reader = new FileReader();

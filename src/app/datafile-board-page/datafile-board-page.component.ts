@@ -1,29 +1,29 @@
-// The code in this file has been derived from the example code at
+// The code in this file has been derived from the example code at XXXXXXXXXXXXXXXXXXX
 // https://www.twilio.com/blog/transfer-files-data-javascript-applications-angular-node-js
 
-
+// External Imports
 import { Component, OnInit } from '@angular/core';
-import { DatafilePageDataService } from '../services/datafile-page-data-service';
-import { datafile, datafileBoard, datafileCluster } from '../../../../WMGTSS-BackEnd/src/DatafileTypes';// XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-import {MatDialog } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
+
+// Internal Imports
+import { datafileCluster } from '../../../../WMGTSS-BackEnd/src/DatafileTypes';
 import { FileUploadDownloadService } from '../services/file-upload-download-service';
-import { User } from '../models/user';
-import { Role } from '../models/role';
+import { User, Role } from '../models/user-data-types';
+import { DatafilePageDataService } from '../services/datafile-page-data-service';
 import { AuthenticationService } from '../services/authentication-service';
 import { CoursePagesService } from '../services/course-pages-service';
 import { ClusterDialogComponent } from '../cluster-dialog/cluster-dialog.component';
-
 
 @Component({
   selector: 'app-datafile-board-page',
   templateUrl: './datafile-board-page.component.html',
   styleUrls: ['./datafile-board-page.component.css']
 })
+
 export class DatafileBoardPageComponent implements OnInit {
-  Clusters: datafileCluster[] = [];
-  moduleId: string = "";
-  boardTitle: string = "";
+  public Clusters: datafileCluster[] = [];
+  public moduleId: string = "";
   public fileInDownload: string;
   public percentage: number;
   public showProgress: boolean;
@@ -38,22 +38,22 @@ export class DatafileBoardPageComponent implements OnInit {
               private clusterDialog: MatDialog, 
               private route: ActivatedRoute) { }
 
-  ngOnInit(): void { // XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX remove unused file fields from the page
-    this.authenticationService.user.subscribe(authenticatedUser => this.user = authenticatedUser);
-    this.datafilePageService.datafileBoardData.subscribe(datafilePageData => this.Clusters = datafilePageData);
+  ngOnInit(): void {
     this.route.paramMap.subscribe(params => { 
       this.moduleId = params.get('moduleId') || ''; 
     });
+    this.authenticationService.user.subscribe(authenticatedUser => this.user = authenticatedUser);
+    this.datafilePageService.datafileBoardData.subscribe(datafilePageData => this.Clusters = datafilePageData);
+
     this.getPageData();
   }
 
-  getPageData() {
-    const moduleObject = this.moduleDataService.getModule("DTS", this.moduleId);
+  public getPageData() {
     this.datafilePageService.getDatafileClusters(this.moduleId);
   }
 
   public download(fileId: number, fileName: string):  void {
-    this.uploadDownloadService.downloadFile(fileId, fileName);
+    this.uploadDownloadService.downloadFile(fileId, this.moduleId, fileName);
   }
  
   public remove(fileId: number):  void {

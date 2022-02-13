@@ -1,6 +1,10 @@
+// External Imports
 import { Component, OnInit } from '@angular/core';
 import { CoursePagesService } from '../services/course-pages-service';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
+
+// Internal Imports
+import { Module } from '../models/course-data-types';
 
 @Component({
   selector: 'app-module-page',
@@ -12,18 +16,18 @@ export class ModulePageComponent implements OnInit {
   pageTitle: string = "";
   boardsData: {id: string, title: string}[] = [];
 
-  constructor(private StudentService: CoursePagesService, private route: ActivatedRoute) { }
+  constructor(private modulePageDataService: CoursePagesService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => { 
       this.moduleId = params.get('moduleId') || ''; 
     });
-    
+
     this.getPageData();
   }
 
   getPageData(): void {
-    const moduleObject = this.StudentService.getModule("DTS", this.moduleId);
+    const moduleObject: Module = this.modulePageDataService.getModule("DTS", this.moduleId);
 
     this.pageTitle = moduleObject.displayTitle;
 

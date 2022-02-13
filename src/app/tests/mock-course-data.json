@@ -1,10 +1,10 @@
 {
-    "courses": {
-        "DTS": {
+    "courses": [
+        {
             "courseId": "DTS",
             "displayTitle": "Digital Technology Solutions",
-            "modules": {
-                "WM300": {
+            "modules": [
+                {
                     "moduleId": "WM300",
                     "displayTitle": "Advanced Mathematics",
                     "boards": {
@@ -15,7 +15,7 @@
                     },
                     "icon": "maths"
                 },
-                "WM350": {
+                {
                     "moduleId": "WM350",
                     "displayTitle": "Software Design",
                     "boards": {
@@ -25,7 +25,7 @@
                     },
                     "icon": "programming"
                 },
-                "WM320": {
+                {
                     "moduleId": "WM320",
                     "displayTitle": "Business Management",
                     "boards": {
@@ -35,7 +35,7 @@
                     },
                     "icon": "businessManagement"
                 },
-                "WM310": {
+                {
                     "moduleId": "WM310",
                     "displayTitle": "Networking",
                     "boards": {
@@ -45,7 +45,7 @@
                     },
                     "icon": "networking"
                 },
-                "WM345": {
+                {
                     "moduleId": "WM325",
                     "displayTitle": "Database Management",
                     "boards": {
@@ -55,8 +55,7 @@
                     },
                     "icon": ""
                 }
-
-            }
+            ]
         }
-    }
+    ]
 }

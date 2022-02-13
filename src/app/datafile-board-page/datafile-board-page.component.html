@@ -6,22 +6,33 @@
             <mat-card-title>{{ cluster.title }}</mat-card-title>
             <mat-card-subtitle>{{ cluster.description }}</mat-card-subtitle>
             <mat-card-content>
-                <table>
-                    <tr *ngFor="let file of cluster.files">
-                        <span (click)="download(file.fileId, file.title)">{{file.title}}</span>&nbsp;
-                        <span (click)="remove(file.fileId)" *ngIf="isUserTutor()">remove</span>
+                <table class="file-table" *ngIf="cluster.files?.length > 0">
+                    <tr class="table-row">
+                        <th class="table-cell"></th>
+                        <th class="table-cell">Uploader</th>
+                        <th class="table-cell">Upload Date</th>
+                        <th class="table-cell">Size</th>
+                        <th class="table-cell">Download Count</th>
+                    </tr>
+                    <tr class="table-row" *ngFor="let file of cluster.files">
+                        <td id="download-file" class="file-name" (click)="download(file.fileId, file.title)">{{file.title}}</td>
+                        <td class="table-cell">{{file.uploader}}</td>
+                        <td class="table-cell">{{file.uploadDate}}</td>
+                        <td class="table-cell">{{file.fileSize}}</td>
+                        <td class="table-cell">{{file.downloadCounter}}</td>
+                        <button mat-raised-button id="remove-file" class="remove-file-button" (click)="remove(file.fileId)" *ngIf="isUserTutor()">remove</button>
                     </tr>
                 </table>
             <app-file-uploader [clusterId]="cluster.clusterId" [moduleId]="moduleId" *ngIf="isUserTutor()"></app-file-uploader>
             <div *ngIf="isUserTutor()">
-                <button class="button" mat-raised-button (click)="editCluster(cluster.clusterId)">Edit Cluster</button>
-                <button class="button" mat-raised-button (click)="deleteCluster(cluster.clusterId)">Delete Cluster</button>
+                <button id="edit-cluster" class="button" mat-raised-button (click)="editCluster(cluster.clusterId)">Edit Cluster</button>
+                <button id="delete-cluster" class="button" mat-raised-button (click)="deleteCluster(cluster.clusterId)">Delete Cluster</button>
             </div>    
             </mat-card-content>
         </mat-card>
     </div>
     </div>
-    <button class="create-button"
+    <button id="create-cluster" class="create-button"
         mat-raised-button (click)="createCluster()" 
         *ngIf="isUserTutor()">Create Cluster
     </button>

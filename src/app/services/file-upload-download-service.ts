@@ -1,13 +1,14 @@
 // The code in this file has been derived from the example code at
 // https://www.twilio.com/blog/transfer-files-data-javascript-applications-angular-node-js
 
+// External Imports
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Subject, Observable } from 'rxjs';
-import { finalize } from 'rxjs/operators';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { saveAs } from 'file-saver';
+import { HttpClient, HttpParams } from '@angular/common/http';
+
+// Internal Imports
 import { environment } from '../../environments/environment';
-import { User } from '../models/user';
+import { User } from '../models/user-data-types';
 import { AuthenticationService } from '../services/authentication-service';
 import { DatafilePageDataService } from './datafile-page-data-service';
 
@@ -42,7 +43,7 @@ export class FileUploadDownloadService {
     });
   }
  
-  public downloadFile(fileId: number, fileName: string): void {
+  public downloadFile(fileId: number, moduleId: string, fileName: string): void {
     let queryParams = new HttpParams();
     let fileType = fileName.split('.').pop()
     queryParams = queryParams.append('accessToken', this.user.token);
@@ -54,9 +55,10 @@ export class FileUploadDownloadService {
 
       anchor.href = objectUrl;
       anchor.download = fileName;
-      //document.body.appendChild(a);
       anchor.click();
       URL.revokeObjectURL(objectUrl);
+
+      this.datafilePageDataService.getDatafileClusters(moduleId); 
     });
   }
  

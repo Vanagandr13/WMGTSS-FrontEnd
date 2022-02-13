@@ -1,29 +1,23 @@
+// External Imports
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable, of } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { BehaviorSubject, Observable } from 'rxjs';
 
-import { Role } from '../models/role';
-import { User } from '../models/user';
-import { environment } from '../../environments/environment';
-
-
-
+// Internal Imports
+import { User, Role } from '../models/user-data-types';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
     private userSubject: BehaviorSubject<User>; // Talk about why this should be accessed directly https://blog.angular-university.io/how-to-build-angular2-apps-using-rxjs-observable-data-services-pitfalls-to-avoid/ XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
     public user: Observable<User>;
-    private privateKey: string; 
     private users: any = [
         { id: 1, username: 'tutor1', password: 'tutor1', firstName: 'Terry', lastName: 'Smith', role: Role.Tutor },
         { id: 2, username: 'tutor2', password: 'tutor2', firstName: 'Tina', lastName: 'Walters', role: Role.Tutor },
         { id: 3, username: 'student1', password: 'student1', firstName: 'Lucy', lastName: 'Higgins', role: Role.Student },
         { id: 4, username: 'student2', password: 'student2', firstName: 'James', lastName: 'Roberts', role: Role.Student }
-    ]; // THis data structure represents the data held within a user database
+    ]; // This data structure represents data that will be held within a user database
 
-    constructor(private router: Router, private http: HttpClient) {
+    constructor(private router: Router) {
         this.userSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('user')));
         this.user = this.userSubject.asObservable();
     }

@@ -4,24 +4,45 @@
 // The Back-End would provide the Front-End with course and module information. This allows for each course 
 // to have differing modules without having to define a seperate page for each module/board.
 
+// External Imports
 import { Injectable } from '@angular/core';
-import json from '../../assets/course-data.json';
+import json from '../tests/mock-course-data.json';
+import { BehaviorSubject, Observable } from 'rxjs';
+
+// Internal Imports
 import { Course, Module } from '../models/course-data-types';
+
 
 @Injectable({
     providedIn: 'root',
 })
 export class CoursePagesService {
-  CoursesData: any = json.courses;
+  private courseSubject: BehaviorSubject<Course>;
+  public course: Observable<Course>;
+  private moduleSubject: BehaviorSubject<Module>;
+  public module: Observable<Module>;
+  private CoursesData: Course[];
 
   constructor() {
+    this.courseSubject = new BehaviorSubject<Course>(null);
+    this.course = this.courseSubject.asObservable();
+
+    this.moduleSubject = new BehaviorSubject<Module>(null);
+    this.module = this.moduleSubject.asObservable();
+
+    this.CoursesData = json.courses;
   }
 
   getCourse(courseId: string): Course {
-    return this.CoursesData[courseId];
+    let course = this.CoursesData.find(x => x.courseId == courseId);
+    this.courseSubject.next(course);
+    return course;
   }
 
   getModule(courseId: string, moduleId: string): Module {
-    return this.CoursesData[courseId].modules[moduleId];
+    let course = this.CoursesData.find(x => x.courseId == courseId);
+    let module = course.modules.find(x => x.moduleId == moduleId);
+    this.moduleSubject.next(module);
+    return module;
   }
 }

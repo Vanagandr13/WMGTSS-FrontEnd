@@ -1,0 +1,28 @@
+{"clusters": [
+        {
+            "clusterId": 1,
+            "title": "Assessment Documents",
+            "description": "These documents relate to the module final assessment. For any questions regarding the assesment please refer to your lecturer",
+            "files": [
+                {   
+                    "fileId": 1,
+                    "title": "Assesment Brief.pdf",
+                    "fileType": ".pdf",
+                    "uploader": "Mr Lecturer",
+                    "uploadDate": "12/01/22",
+                    "fileSize": "100Kb",
+                    "downloadCounter": 1
+                },
+                {
+                    "fileId": 2,
+                    "title": "Assesment Front Sheet.docx",
+                    "fileType": ".docx",
+                    "uploader": "Mr Lecturer",
+                    "uploadDate": "12/01/22",
+                    "fileSize": "50Kb",
+                    "downloadCounter": 2
+                }
+            ]
+        }
+    ]
+}

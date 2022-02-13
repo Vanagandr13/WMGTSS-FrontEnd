@@ -11,6 +11,9 @@ import { MatInputModule } from '@angular/material/input'
 import { MatDialogModule } from '@angular/material/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
+import { MatDialogRef } from '@angular/material/dialog';
+import { Router, ActivatedRoute } from '@angular/router';
+import { FormBuilder } from '@angular/forms';
 
 // Internal dependencies
 import { AppRoutingModule } from './app-routing.module';
@@ -26,6 +29,7 @@ import { FileUploadComponent } from './file-upload/file-upload.component';
 import { ClusterDialogComponent } from './cluster-dialog/cluster-dialog.component';
 
 import { AuthenticationService } from './services/authentication-service';
+import { CoursePagesService } from './services/course-pages-service';
 
 @NgModule({
   declarations: [
@@ -50,12 +54,12 @@ import { AuthenticationService } from './services/authentication-service';
     MatFormFieldModule,
     MatDialogModule,
     MatInputModule
-
   ],
   providers: [
     DatafilePageDataService,
     FileUploadDownloadService,
-    AuthenticationService
+    AuthenticationService,
+    CoursePagesService
   ],
   bootstrap: [AppComponent]
 })
