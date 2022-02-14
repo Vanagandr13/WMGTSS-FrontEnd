@@ -5,7 +5,7 @@ import { Observable, throwError, of, BehaviorSubject } from 'rxjs';
 import { catchError, retry, map, tap } from 'rxjs/operators';
 
 // Internal Imports
-import { datafileCluster } from '../../../../WMGTSS-BackEnd/src/DatafileTypes'; // In the final system these types will be made into aproper dependency
+import { datafileCluster } from '../models/DatafileTypes'; // In the final system these types will be made into aproper dependency
 import { environment } from '../../environments/environment';
 import { User } from '../models/user-data-types';
 import { AuthenticationService } from './authentication-service';

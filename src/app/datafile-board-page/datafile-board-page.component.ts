@@ -7,7 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 
 // Internal Imports
-import { datafileCluster } from '../../../../WMGTSS-BackEnd/src/DatafileTypes';
+import { datafileCluster } from '../models/DatafileTypes';
 import { FileUploadDownloadService } from '../services/file-upload-download-service';
 import { User, Role } from '../models/user-data-types';
 import { DatafilePageDataService } from '../services/datafile-page-data-service';
