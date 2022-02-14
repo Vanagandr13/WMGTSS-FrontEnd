@@ -6,7 +6,7 @@
 4. Open a cmd window inside the repositories base folder.
 5. Install the Angular CLI globally using the command "npm install -g @angular/cli".
 6. Run the command "npm install" this will download all the dependencies the front end.
-7. Run "npm start". The front end should now being runnng to access it simply navigate to http://localhost:4200 using a web browser.
+7. Run "npm start". The front end should now being runnng to access it simply navigate to http://localhost:4200 using a web browser (google chrome recommended).
 8. You can log into the WMGTSS using the accounts:  { username: "student1" password: "student1" } or { username: "tutor1" password: "tutor1"}.
 9. use the command "ng test" to run the unit tests or the command "npm run build" to build the Front-end without running it.
  
