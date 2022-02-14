@@ -1,3 +1,16 @@
+# Installation Instructions
+
+1. Firstly install Node JS preferably version 16.13.2.
+2. Next check that NPM is also installed, preferably version 8.1.2.
+3. Unpack the zipped repository or download source from https://github.com/Vanagandr13.
+4. Open a cmd window inside the repositories base folder.
+5. Install the Angular CLI globally using the command "npm install -g @angular/cli".
+6. Run the command "npm install" this will download all the dependencies the front end.
+7. Run "npm start". The front end should now being runnng to access it simply navigate to http://localhost:4200 using a web browser.
+8. You can log into the WMGTSS using the accounts:  { username: "student1" password: "student1" } or { username: "tutor1" password: "tutor1"}.
+9. use the command "ng test" to run the unit tests or the command "npm run build" to build the Front-end without running it.
+ 
+
 # WMGTSSFrontEnd
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.1.4.

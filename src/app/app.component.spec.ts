@@ -1,4 +1,4 @@
-//
+// External Imports
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { NgModule } from '@angular/core';
@@ -29,7 +29,6 @@ import { DatafilePageDataService } from './services/datafile-page-data-service';
 import { FileUploadDownloadService } from './services/file-upload-download-service';
 import { FileUploadComponent } from './file-upload/file-upload.component';
 import { ClusterDialogComponent } from './cluster-dialog/cluster-dialog.component';
-
 import { AuthenticationService } from './services/authentication-service';
 
 describe('AppComponent', () => {

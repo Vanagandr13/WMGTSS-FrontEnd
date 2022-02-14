@@ -24,7 +24,7 @@ export class LoginPageComponent implements OnInit {
       private router: Router,
       private authenticationService: AuthenticationService
   ) { 
-      // redirect to home if already logged in
+      // Redirect to home if already logged in.
       if (this.authenticationService.userValue) { 
           this.router.navigate(['/']);
       }
@@ -42,13 +42,14 @@ export class LoginPageComponent implements OnInit {
   onSubmit() {
       this.submitted = true;
 
-      // stop here if form is invalid
+      // Stop here if form is invalid.
       if (this.loginForm.invalid) {
           return;
       }
 
       this.loading = true;
       try {
+        // Send login details to the authentication service.
         this.authenticationService.login(this.loginForm.get('username').value, this.loginForm.get('password').value)
       }
       catch (error) {
@@ -57,7 +58,7 @@ export class LoginPageComponent implements OnInit {
         return;
       }
 
-      // get return url from query parameters or default to home page
+      // Get return url from query parameters or default to home page.
       const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
       this.router.navigateByUrl(returnUrl);
 

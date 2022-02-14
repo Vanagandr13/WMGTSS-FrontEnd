@@ -1,3 +1,5 @@
+// Datafile Board Unit Tests
+
 // External Imports
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialog } from '@angular/material/dialog';
@@ -17,6 +19,7 @@ describe('DatafileBoardPageComponent', () => {
   let component: DatafileBoardPageComponent;
   let fixture: ComponentFixture<DatafileBoardPageComponent>;
 
+  // Set up mock services. Mock services deliver the data needed to conduct unit tests.  
   const mockActivateRouteService = new MockActiveRouteService();
   const mockAuthService = new MockAuthService();
   const mockPageService = new MockDatafilePageService();
@@ -27,7 +30,7 @@ describe('DatafileBoardPageComponent', () => {
 
   beforeEach(async() => {
   
-    // service spies
+    // Service spies.
     spyOn(mockPageService, 'getDatafileClusters');
     spyOn(mockPageService, 'removeCluster');
 

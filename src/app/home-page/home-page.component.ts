@@ -24,6 +24,7 @@ export class HomePageComponent implements OnInit {
   getPageData(): void {
     const courseObject = this.StudentService.getCourse("DTS");
 
+    // Initialise values the display needs.
     for (const key in courseObject.modules)
     {
       this.ModulesData.push({id: courseObject.modules[key].moduleId, 
@@ -32,14 +33,14 @@ export class HomePageComponent implements OnInit {
     }
   }
 
-  getModuleIcon(iconName: string): string {
+  getModuleIcon(iconName: string): string { // Load Module Images
     if(this.IconList.indexOf(iconName) > -1)
     {
       return '../../assets/images/' + iconName + 'Icon.jpg'
     }
     else
     {
-      return '../../assets/images/moduleIcon.jpg' // use default image if the module doesn't have a valid icon
+      return '../../assets/images/moduleIcon.jpg' // Use default image if the module doesn't have a valid icon
     }
   }
 }

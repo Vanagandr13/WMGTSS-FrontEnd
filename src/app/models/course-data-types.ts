@@ -8,6 +8,6 @@ export interface Course {
 export interface Module {
     moduleId: string,
     displayTitle: string,
-    boards: { [key: string]: string},
+    boards: { [key: string]: string },
     icon: string,
 };

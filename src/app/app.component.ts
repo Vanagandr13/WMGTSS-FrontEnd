@@ -1,5 +1,8 @@
+// External Imports
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
+
+// Internal Imports
 import { FileUploadDownloadService } from './services/file-upload-download-service';
 import { AuthenticationService } from './services/authentication-service';
 import { User, Role } from './models/user-data-types';
@@ -16,7 +19,7 @@ export class AppComponent {
   public displayLoader: Observable<boolean> = this.fileService.isLoading();
 
   constructor(private fileService: FileUploadDownloadService, private authenticationService: AuthenticationService) {
-    this.authenticationService.user.subscribe(authenticatedUser => this.user = authenticatedUser);
+    this.authenticationService.user.subscribe(authenticatedUser => this.user = authenticatedUser); // Set up subscriptions.
   }
 
   get isTutor() {

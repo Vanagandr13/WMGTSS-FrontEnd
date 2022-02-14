@@ -23,7 +23,7 @@ export class FileUploadDownloadService {
   private displayLoader$: Subject<boolean> = new BehaviorSubject<boolean>(false);
 
   constructor(private http: HttpClient, private authenticationService: AuthenticationService, private datafilePageDataService: DatafilePageDataService) {
-    this.authenticationService.user.subscribe(authenticatedUser => this.user = authenticatedUser);
+    this.authenticationService.user.subscribe(authenticatedUser => this.user = authenticatedUser); // Set up subscriptions.
     this.dataFileBackendURL = environment.apiURL + '/api';
    }
  
@@ -38,7 +38,7 @@ export class FileUploadDownloadService {
     const body = {name: fileName, clusterId: clusterId, content: fileContent};
     this.http.put(this.dataFileBackendURL + '/file/upload', body, {params:queryParams})
     .subscribe(() => {
-      // Get the updated page
+      // Get the updated page.
       this.datafilePageDataService.getDatafileClusters(moduleId);
     });
   }
@@ -58,6 +58,7 @@ export class FileUploadDownloadService {
       anchor.click();
       URL.revokeObjectURL(objectUrl);
 
+      // Get the updated page.
       this.datafilePageDataService.getDatafileClusters(moduleId); 
     });
   }
@@ -67,7 +68,7 @@ export class FileUploadDownloadService {
     queryParams = queryParams.append('accessToken', this.user.token);
     queryParams = queryParams.append("fileId", fileId);
     this.http.delete(this.dataFileBackendURL + '/file/delete', {params: queryParams}).subscribe(() => {
-      // Get the updated page
+      // Get the updated page.
       this.datafilePageDataService.getDatafileClusters(moduleId); 
     });
   }

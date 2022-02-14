@@ -7,7 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 
 // Internal Imports
-import { datafileCluster } from '../models/DatafileTypes';
+import { datafileCluster } from '../models/datafile-types';
 import { FileUploadDownloadService } from '../services/file-upload-download-service';
 import { User, Role } from '../models/user-data-types';
 import { DatafilePageDataService } from '../services/datafile-page-data-service';
@@ -29,7 +29,7 @@ export class DatafileBoardPageComponent implements OnInit {
   public showProgress: boolean;
   public showDownloadError: boolean;
   public showUploadError: boolean;
-  user: User;
+  private user: User;
  
   constructor(private moduleDataService: CoursePagesService, 
               private authenticationService: AuthenticationService,
@@ -39,58 +39,66 @@ export class DatafileBoardPageComponent implements OnInit {
               private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    // Set up Routing.
     this.route.paramMap.subscribe(params => { 
       this.moduleId = params.get('moduleId') || ''; 
     });
-    this.authenticationService.user.subscribe(authenticatedUser => this.user = authenticatedUser);
+    // Set up  other observers.
+    this.authenticationService.user.subscribe(authenticatedUser => this.user = authenticatedUser); // Set up subscriptions.
     this.datafilePageService.datafileBoardData.subscribe(datafilePageData => this.Clusters = datafilePageData);
 
     this.getPageData();
   }
 
   public getPageData() {
+    // Pass data to the service to process. This component shouldn't need to know how the service works. It justs needs to know service inputs and outputs.
     this.datafilePageService.getDatafileClusters(this.moduleId);
   }
 
   public download(fileId: number, fileName: string):  void {
-    this.uploadDownloadService.downloadFile(fileId, this.moduleId, fileName);
+    this.uploadDownloadService.downloadFile(fileId, this.moduleId, fileName); // Pass data to the service to process.
   }
  
   public remove(fileId: number):  void {
     this.uploadDownloadService.removeFile(fileId, this.moduleId);
   }
 
+// Used to validate that the current user is a tutor. This prevents tutor only html elements being available to students
   public isUserTutor(): boolean {
     return this.user && this.user.role === Role.Tutor;
   }
 
   public createCluster() {
+    // Configure the cluster dialog.
     const dialog = this.clusterDialog.open(ClusterDialogComponent, {
       width: '500px',
       height: '500px',
       data: {title: "", description: "", dialogTitle:"Create Cluster"}
     });
-  
+    
+    // The cluster dialog shouldn't need to know what function to call when it closes. So pass in a function here instead.
     dialog.afterClosed().subscribe(result => {
-      this.datafilePageService.createCluster(this.moduleId, result['title'], result['description'])
+      this.datafilePageService.createCluster(this.moduleId, result['title'], result['description']) // Pass data to the service to process.
     });
   }
 
-  public editCluster(clusterId) {
+  public editCluster(clusterId: number) {
     let cluster: datafileCluster = this.Clusters.find(x => x.clusterId == clusterId)
 
+    // Configure the cluster dialog.
     const dialog = this.clusterDialog.open(ClusterDialogComponent, {
       width: '500px',
       height: '500px',
       data: {title: cluster.title, description: cluster.description, dialogTitle:"Edit Cluster"}
     });
-  
+    
+    // The cluster dialog shouldn't need to know what function to call when it closes. So pass in a function here instead.
     dialog.afterClosed().subscribe(result => {
-      this.datafilePageService.modifyCluster(this.moduleId, cluster.clusterId, result['title'], result['description']);
+      this.datafilePageService.modifyCluster(this.moduleId, cluster.clusterId, result['title'], result['description']); // Pass data to the service to process.
     });
   }
 
   public deleteCluster(clusterId) {
-    this.datafilePageService.removeCluster(this.moduleId, clusterId);
+    this.datafilePageService.removeCluster(this.moduleId, clusterId); // Pass data to the service to process.
   }
 }

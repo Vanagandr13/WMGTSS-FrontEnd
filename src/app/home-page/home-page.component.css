@@ -18,11 +18,10 @@
 }
 
 .module-list-container {
-    position: absolute;
+    margin-left: 5%;
+    margin-left: 20%;
     top: 50%;
     left: 50%;
-    -ms-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
 }
 
 .button {
