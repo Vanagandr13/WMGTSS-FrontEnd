@@ -19,16 +19,18 @@ export class ModulePageComponent implements OnInit {
   constructor(private modulePageDataService: CoursePagesService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    // Set up Routing.
     this.route.paramMap.subscribe(params => { 
       this.moduleId = params.get('moduleId') || ''; 
-    });
+    }); 
 
     this.getPageData();
   }
 
-  getPageData(): void {
+  getPageData(): void { 
     const moduleObject: Module = this.modulePageDataService.getModule("DTS", this.moduleId);
 
+    // Initialise values the display needs.
     this.pageTitle = moduleObject.displayTitle;
 
     for (const key in moduleObject.boards)

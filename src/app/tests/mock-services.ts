@@ -1,9 +1,13 @@
-import { User, Role } from '../models/user-data-types';
+// External Imports
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
-import datafilePageData from './mock-datafile-data.json'; 
-import { datafileCluster } from '../../../../WMGTSS-BackEnd/src/DatafileTypes'; // In the final system these types will be made into aproper dependency
 
+// Internal Imports
+import { User, Role } from '../models/user-data-types';
+import datafilePageData from './mock-datafile-data.json'; 
+import { datafileCluster } from '../models/datafile-types';
+
+// These services are mock services. They act as stand ins for real services during unit test.
 
 class MockRouteParamMap {
   params: { [key: string]: string};
@@ -34,6 +38,7 @@ export class MockAuthService {
     public user: Observable<User>;
 
     constructor() {
+      // Set up observable
       this.userSubject = new BehaviorSubject<User>({
         id: 100,
         firstName: "Bob",
@@ -52,6 +57,7 @@ export class MockDatafilePageService {
   public datafileBoardData: Observable<datafileCluster[]>;
 
   constructor() {
+    // Set up observable
     this.datafileBoardSubject = new BehaviorSubject<datafileCluster[]>(datafilePageData.clusters);
     this.datafileBoardData = this.datafileBoardSubject.asObservable();
   }

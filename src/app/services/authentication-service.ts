@@ -8,7 +8,7 @@ import { User, Role } from '../models/user-data-types';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
-    private userSubject: BehaviorSubject<User>; // Talk about why this should be accessed directly https://blog.angular-university.io/how-to-build-angular2-apps-using-rxjs-observable-data-services-pitfalls-to-avoid/ XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+    private userSubject: BehaviorSubject<User>;
     public user: Observable<User>;
     private users: any = [
         { id: 1, username: 'tutor1', password: 'tutor1', firstName: 'Terry', lastName: 'Smith', role: Role.Tutor },
@@ -19,7 +19,7 @@ export class AuthenticationService {
 
     constructor(private router: Router) {
         this.userSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('user')));
-        this.user = this.userSubject.asObservable();
+        this.user = this.userSubject.asObservable(); // It's best if the observers do not subscribe to te behaviour subject directly but to this observable
     }
 
     public get userValue(): User {
@@ -40,15 +40,15 @@ export class AuthenticationService {
                 token: 'fake-jwt-token,' + user.id + ',' + user.role
             };
             
-            // store user details and jwt token in local storage to keep user logged in between page refreshes
+            // Store user details and jwt token in local storage to keep user logged in between page refreshes.
             localStorage.setItem('user', JSON.stringify(userObject));
-            this.userSubject.next(userObject);
+            this.userSubject.next(userObject); // Update the observable.
             return userObject;
         }
     }
 
     logout() {
-        // remove user from local storage to log user out
+        // Remove user from local storage to log user out.
         localStorage.removeItem('user');
         this.userSubject.next(null);
         this.router.navigate(['/loginPage']);

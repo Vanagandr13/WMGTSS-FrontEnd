@@ -5,7 +5,7 @@ import { Observable, throwError, of, BehaviorSubject } from 'rxjs';
 import { catchError, retry, map, tap } from 'rxjs/operators';
 
 // Internal Imports
-import { datafileCluster } from '../../../../WMGTSS-BackEnd/src/DatafileTypes'; // In the final system these types will be made into aproper dependency
+import { datafileCluster } from '../models/datafile-types'; // In the final system these types will be made into aproper dependency
 import { environment } from '../../environments/environment';
 import { User } from '../models/user-data-types';
 import { AuthenticationService } from './authentication-service';
@@ -27,7 +27,10 @@ export class DatafilePageDataService {
     this.CreateClusterEndpoint = environment.apiURL + '/api/cluster/create';
     this.ModifyClusterEndpoint = environment.apiURL + '/api/cluster/modify';
     this.RemoveClusterEndpoint = environment.apiURL + '/api/cluster/delete';
-    this.authenticationService.user.subscribe(authenticatedUser => this.user = authenticatedUser);
+    
+    this.authenticationService.user.subscribe(authenticatedUser => this.user = authenticatedUser); // Set up subscriptions.
+    
+    // Set up observables   
     this.datafileBoardSubject = new BehaviorSubject<datafileCluster[]>([]);
     this.datafileBoardData = this.datafileBoardSubject.asObservable();
   }
@@ -39,7 +42,7 @@ export class DatafilePageDataService {
     const body = {clusterTitle: title, clusterDescription: description};
     this.http.post(this.CreateClusterEndpoint, body, {params: queryParams})
     .subscribe(() => {
-      // Get the updated page
+      // Get the updated page.
       this.getDatafileClusters(moduleId);
     });  
   }
@@ -51,7 +54,7 @@ export class DatafilePageDataService {
     const body = {clusterTitle: title, clusterDescription: description};
     this.http.put(this.ModifyClusterEndpoint, body, {params: queryParams})
     .subscribe(() => {
-      // Get the updated page
+      // Get the updated page.
       this.getDatafileClusters(moduleId);
     });  
   }
@@ -62,11 +65,12 @@ export class DatafilePageDataService {
     queryParams = queryParams.append("clusterId", clusterId);
     this.http.delete(this.RemoveClusterEndpoint, {params: queryParams})
     .subscribe(() => {
-      // Get the updated page
+      // Get the updated page.
       this.getDatafileClusters(moduleId);
     });  
   }
 
+  // Gets the page data for the datafile board.
   getDatafileClusters(moduleId: string) {
     let queryParams = new HttpParams();
     queryParams = queryParams.append('accessToken', this.user.token);
@@ -81,6 +85,7 @@ export class DatafilePageDataService {
       
   }
 
+  // Handles errors which occur in the getDatafileClusters() request
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
   

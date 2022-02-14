@@ -26,6 +26,7 @@ export class FileUploadComponent {
 
  constructor(private formBuilder: FormBuilder, private fileService: FileUploadDownloadService, private route: ActivatedRoute) { }
 
+ // Called when new upload files are chosen.
  public onFileChange(event) {
    const reader = new FileReader();
 
@@ -42,7 +43,8 @@ export class FileUploadComponent {
    }
  }
 
+// Call when the submit button is pressed.
 public onSubmit(): void {
-   this.fileService.uploadFile(this.fileName, this.clusterId, this.moduleId, this.formGroup.get('file').value);
+   this.fileService.uploadFile(this.fileName, this.clusterId, this.moduleId, this.formGroup.get('file').value); // Send data to the service to process.
   }
 }

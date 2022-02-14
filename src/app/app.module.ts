@@ -1,4 +1,4 @@
-// External dependencies
+// External Imports
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
@@ -15,7 +15,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder } from '@angular/forms';
 
-// Internal dependencies
+// Internal Imports
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginPageComponent } from './login-page/login-page.component';
@@ -31,6 +31,7 @@ import { ClusterDialogComponent } from './cluster-dialog/cluster-dialog.componen
 import { AuthenticationService } from './services/authentication-service';
 import { CoursePagesService } from './services/course-pages-service';
 
+// This declares  components, services and dependencies so they can be used throughout the app.
 @NgModule({
   declarations: [
     AppComponent,

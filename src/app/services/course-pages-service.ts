@@ -1,8 +1,8 @@
 // As this is a protoype of the real system, this services with dummy data course and module data
 
-// In the eventual system, this service would interface with the WMGTSS Back-End. 
+// In the eventual system, this service would interface with a WMGTSS Course Data Back-End. 
 // The Back-End would provide the Front-End with course and module information. This allows for each course 
-// to have differing modules without having to define a seperate page for each module/board.
+// to have differing modules without having to define a seperate page for each course/module.
 
 // External Imports
 import { Injectable } from '@angular/core';
@@ -24,6 +24,7 @@ export class CoursePagesService {
   private CoursesData: Course[];
 
   constructor() {
+    // Initialise observables.
     this.courseSubject = new BehaviorSubject<Course>(null);
     this.course = this.courseSubject.asObservable();
 
@@ -35,14 +36,14 @@ export class CoursePagesService {
 
   getCourse(courseId: string): Course {
     let course = this.CoursesData.find(x => x.courseId == courseId);
-    this.courseSubject.next(course);
+    this.courseSubject.next(course); // Update the observable.
     return course;
   }
 
   getModule(courseId: string, moduleId: string): Module {
     let course = this.CoursesData.find(x => x.courseId == courseId);
     let module = course.modules.find(x => x.moduleId == moduleId);
-    this.moduleSubject.next(module);
+    this.moduleSubject.next(module); // Update the observable.
     return module;
   }
 }
